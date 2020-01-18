@@ -6,10 +6,10 @@ import re
 class Tweets(object):
     def __init__(self):
         # Twitter application credentials
-        consumer_key = "XXXXX"
-        consumer_secret = "XXXXX"
-        access_key = "XXXXX"
-        access_secret = "XXXXX"
+        consumer_key = "r3Ap9DLq53CuwpIOnooiQ6afD"
+        consumer_secret = "1PON4shDblzScimC0mpoJKK0l4dI0PS5HaCEJp5HTrhAmj3vZQ"
+        access_key = "3010532787-pAbZq1iSHX7cmihQqJDkLEo4ESCDus0QjD3SX9c"
+        access_secret = "o8hbKaQXcmiQkZCnD4Yc0Bnx091nyEFhAatuEksiwqKtm"
         # Pass Twitter credentials to Tweepy
         try:
             self.auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -34,7 +34,7 @@ class Tweets(object):
     def get_tweet_content(self, query, count=10):
         tweets = []
         try:
-            fetched_tweets = self.api.search(query, count)
+            fetched_tweets = self.api.search(q=query, count=count)
             for tweet in fetched_tweets:
                 parsed_tweet = {'text': tweet.text, 'sentiment': self.get_tweet_sentiment(tweet.text)}
                 if tweet.retweet_count > 0:
@@ -49,7 +49,7 @@ class Tweets(object):
 
 def main():
     api = Tweets()
-    tweets = api.get_tweet_content(input("Enter a keyword or phrase you'd like to search: "), 200)
+    tweets = api.get_tweet_content(query=input("Enter a keyword or phrase you'd like to search: "), count=200)
     # picking positive tweets from tweets
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
     # percentage of positive tweets
@@ -59,8 +59,7 @@ def main():
     # percentage of negative tweets
     print("Negative tweets percentage: {} %".format(100 * len(ntweets) / len(tweets)))
     # percentage of neutral tweets
-    print("Neutral tweets percentage: {} % \
-          ".format(100 * len(tweets - ntweets - ptweets) / len(tweets)))
+    print("Neutral tweets percentage: {} %".format(100 * (len(tweets) - len(ntweets) - len(ptweets)) / len(tweets)))
 
     # printing first 5 positive tweets
     print("\n\nPositive tweets:")
