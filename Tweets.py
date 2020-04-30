@@ -6,10 +6,10 @@ import re
 class Tweets(object):
     def __init__(self):
         # Twitter application credentials
-        consumer_key = "r3Ap9DLq53CuwpIOnooiQ6afD"
-        consumer_secret = "1PON4shDblzScimC0mpoJKK0l4dI0PS5HaCEJp5HTrhAmj3vZQ"
-        access_key = "3010532787-pAbZq1iSHX7cmihQqJDkLEo4ESCDus0QjD3SX9c"
-        access_secret = "o8hbKaQXcmiQkZCnD4Yc0Bnx091nyEFhAatuEksiwqKtm"
+        consumer_key = "xxxx"
+        consumer_secret = "xxxx"
+        access_key = "xxxx"
+        access_secret = "xxxx"
         # Pass Twitter credentials to Tweepy
         try:
             self.auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
